@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base target="_top">
+    <meta charset="UTF-8">
+    <title>Home</title>
+
+    <!--load CSS-->
+    <?!= include('Home/dashboard-stylesheet'); ?>
+</head>
+<body>
+
+<div>
+    <ul>
+        <li><?var url = getScriptUrl();?><a href='<?=url?>?page=Home/dashboard'
+                                            class="nav-item__link nav-item__link--intro navigation__link nav-item__link--active">
+            Home </a>
+        </li>
+    </ul>
+</div>
+
+<div>
+    <nav>
+        <div class="container">
+            <!--Redirection to different pages by button click -->
+            <div class="item"><?var url = getScriptUrl();?>
+                <a href='<?=url?>?page=search/search'
+                   class="nav-item__link nav-item__link--intro navigation__link nav-item__link--active">
+                    <strong>Search</strong>
+                    <p style="text-decoration: none" class="description">Here you can query the database with
+                        parameters.</p>
+                </a>
+            </div>
+
+            <div class="item"><?var url = getScriptUrl();?>
+                <a href='<?=url?>?page=credentials-configuration/add-counter-5-credentials'
+                   class="nav-item__link nav-item__link--intro navigation__link nav-item__link--active">
+                    <strong>Add Counter 5 Credentials</strong>
+                    <p class="description">Here you can add new credentials for a vendor using counter 5.</p>
+                </a>
+            </div>
+
+            <div class="item"><?var url = getScriptUrl();?>
+                <a href='<?=url?>?page=credentials-configuration/update-counter-5-credentials'
+                   class="nav-item__link nav-item__link--intro navigation__link nav-item__link--active">
+                    <strong>Update Counter 5 Credentials</strong>
+                    <p class="description">Here you can update the credentials for a vendor using counter 5.</p>
+                </a>
+            </div>
+
+            <div class="item"><?var url = getScriptUrl();?>
+                <a href='<?=url?>?page=counter5-harvesting/counter5-harvest'
+                   class="nav-item__link nav-item__link--intro navigation__link nav-item__link--active">
+                    <strong>Harvest Counter 5 Reports</strong>
+                    <p class="description">Here you can harvest counter 5 reports from supported vendors.</p>
+                </a>
+            </div>
+
+            <div class="item"><?var url = getScriptUrl();?>
+                <a href='<?=url?>?page=counter4-upload/counter4-upload'
+                   class="nav-item__link nav-item__link--intro navigation__link nav-item__link--active">
+                    <strong>Upload Counter 4</strong>
+                    <p class="description">Here you can automatically upload pre-harvested Counter 4 reports to the
+                        database</p>
+                </a>
+            </div>
+
+            <div class="item"><?var url = getScriptUrl();?>
+                <a href='<?=url?>?page=counter5-upload/counter5-upload'
+                   class="nav-item__link nav-item__link--intro navigation__link nav-item__link--active">
+                    <strong>Upload Counter 5</strong>
+                    <p class="description">Here you can automatically upload pre-harvested Counter 5 reports to the
+                        database</p>
+                </a>
+            </div>
+
+            <div class="item"><?var url = getScriptUrl();?>
+                <a href='<?=url?>?page=search/update-search-index'
+                   class="nav-item__link nav-item__link--intro navigation__link nav-item__link--active">
+                    <strong>Update the Search Index</strong>
+                    <p class="description">Here you can generate the Search environment in order to perform the search action</p>
+                </a>
+            </div>
+
+        </div>
+    </nav>
+</div>
+</body>
+</html>

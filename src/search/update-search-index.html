@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base target="_top">
+    <meta charset="UTF-8">
+    <title>Make a Search</title>
+    <!--load CSS-->
+    <?!= include('query-database/query-database-style'); ?>
+</head>
+<body>
+
+<div>
+    <ul>
+        <li><?var url = getScriptUrl();?>
+            <a href='<?=url?>?page=Home/dashboard'
+               class="nav-item__link nav-item__link--intro navigation__link nav-item__link--active">
+                Home
+            </a>
+        </li>
+    </ul>
+</div>
+
+<h2 class="title-align">Update the Search Index</h2>
+<div class="container">
+
+    <form id="update-data">
+        <div class="row">
+            <!-- TITLE OF REPORT / JOURNAL ENTRY-->
+            <div class="col-75">
+                <input type="radio" name = "update" id = "YearRadio" onclick="check(this.id)"><font color="black">Update By Year</font>
+            </div>
+            <div class="col-75">
+                <input type="text" name ="year" id="updateYear" placeholder=" The year need of the reports needs to be update" disabled>
+            </div>
+        </div>
+
+
+        <!-- Submit Button for the Form -->
+        <input type="submit" id="updateByYear" value = "Update By Year" disabled>
+        <br>
+
+        <br>
+        <input type="radio" name = "update" id = "All" onclick="check(this.id)"><font color="black">Update All Reports</font>
+        <br>
+        <!-- Submit Button for the Form -->
+        <input type="submit" id="updateAll" value = "Update All">
+
+
+    </form>
+</div>
+<script src='//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
+<script>
+    function check(id)
+    {
+        if(id == "All")
+        {
+            document.getElementById("updateAll").disabled= false;
+            document.getElementById("updateByYear").disabled = true;
+            document.getElementById("updateYear").disabled = true;
+            document.getElementById("updateYear").value = null;
+        }
+        if(id == "YearRadio")
+        {
+            document.getElementById("updateAll").disabled= true;
+            document.getElementById("updateByYear").disabled = false;
+            document.getElementById("updateYear").disabled = false;
+        }
+    }
+    $("#update-data").submit(function () {google.script.run.withFailureHandler(failHandle).withSuccessHandler(updateResult).updates(this); return false;});
+    function updateResult(){
+        alert("End");
+    }
+    function failHandle()
+    {
+        alert("Something is wrong");
+    }
+</script>
+</body>
+</html>

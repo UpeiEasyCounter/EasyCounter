@@ -1,0 +1,79 @@
+<script>
+    var LEASTLENGTH=7;
+    /** adding handler to harvest button */
+    var btnClassVendor = function(e){
+        /** call server functions with successful handler */
+        google.script.run.withSuccessHandler(onSuccessVendor).harvestVendorList(e.currentTarget.id,);
+    }
+    /** adding handler to retry button */
+    var btnClassReport = function(e){
+        /** getting the report type */
+        var type=$(this).attr("data-type");
+        /** call server functions with successful handler */
+        google.script.run.withSuccessHandler(onSuccessReport).harvestVendorList(e.currentTarget.id,type);
+    }
+
+    /** if it successfully run the function, and get the returned error */
+    function onSuccessVendor(errors) {
+
+        /**check if there are any errors*/
+        if(errors.length>LEASTLENGTH){
+            /** set the division to the return value */
+            document.getElementById('errors').innerHTML = errors;
+            /** open the dialog */
+            location.hash = document.getElementById("error-report").getAttribute('href').substr(1);
+            /** opens a new window to keep the errors in some place */
+            var tempWindow = window.open();
+            /** get the error divsion into an object */
+            var errorDiv = $("#errors").html();
+            /** writing the object to the new window */
+            $(tempWindow.document.body).html(errorDiv);
+        }
+        else{
+            /** set the error division to "no errors" */
+            document.getElementById('errors').innerHTML = '<h2 style="text-align:center;">No errors!</h2>';
+            /** open the dialog */
+            location.hash = document.getElementById("error-report").getAttribute('href').substr(1);
+        }
+    }
+    /** if it successfully run the function, and get the returned error */
+    function onSuccessReport(errors) {
+        /**check if there are any errors*/
+        if(errors.length>LEASTLENGTH){
+            /** set the division to the return value */
+            document.getElementById('errors').innerHTML = errors;
+            /** pop up dialog */
+            location.hash = document.getElementById("error-report").getAttribute('href').substr(1);
+        }
+        else{
+            /** set the error division to "no errors" */
+            document.getElementById('errors').innerHTML = '<h2 style="text-align:center;">No errors!</h2>';
+            /** pop up dialog */
+            location.hash = document.getElementById("error-report").getAttribute('href').substr(1);
+        }
+    }
+</script>
+
+<script>
+    function search() {
+        /** Declare variables */
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("status");
+        tr = table.getElementsByTagName("tr");
+
+        /** Loop through all table rows, and hide those who don't match the search query */
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>

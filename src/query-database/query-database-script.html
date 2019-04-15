@@ -1,0 +1,9 @@
+<script>
+    /**
+     * This function is passed some arguments and calls the searchIndex method in query-database.ts
+     */
+    function submitSearch()
+    {
+        google.script.run.read_SearchIndex("Title",$("#reportTitle"),$("#year"),$("#type"));
+    }
+</script>

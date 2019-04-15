@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base target="_top">
+    <meta charset="UTF-8">
+    <title>Counter4</title>
+
+    <!--load CSS-->
+    <?!= include('counter4-upload/counter4-upload-stylesheet'); ?>
+</head>
+<body>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<script>
+    $(function() {
+        google.script.run.uploadPreHarvestedCounter4();
+    })
+</script>
+
+<div>
+    <ul>
+        <li><?var url = getScriptUrl();?>
+            <a href='<?=url?>?page=Home/dashboard'
+               class="nav-item__link nav-item__link--intro navigation__link nav-item__link--active">
+                Home
+            </a>
+        </li>
+    </ul>
+</div>
+
+<div>
+    <h2>The Counter 4 reports are being uploaded to the database...</h2>
+    <p>You can return to the home page</p>
+</div>
+
+</body>
+</html>

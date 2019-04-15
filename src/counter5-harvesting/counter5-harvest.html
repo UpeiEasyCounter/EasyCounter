@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <base target="_top">
+    <!--load CSS-->
+    <?!= include('counter5-harvesting/counter5-stylesheet'); ?>
+    <!--import libraries-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
+</head>
+<body>
+
+<!--load script file-->
+<?!= include('counter5-harvesting/counter5-script'); ?>
+
+<div data-role="page" id="main">
+
+    <div>
+        <ul>
+            <li><?var url = getScriptUrl();?>
+                <a href='<?=url?>?page=Home/dashboard'
+                   class="nav-item__link nav-item__link--intro navigation__link nav-item__link--active"
+                   id="navi-ref">
+                    Home </a>
+            </li>
+        </ul>
+    </div>
+
+    <!--header-->
+    <div class="header">
+        <h1>Harvest COUNTER5 Reports</h1>
+    </div>
+
+
+    <div class='row'>
+        <!--instruction-->
+        <div class="column-instruction">
+            <h2>Instructions: </h2>
+            <p>On the Right you can harvest all vendors supported reports by clicking a single button.</p>
+            <p>Below the table will allow you to either harvest all reports under a single vendor or retry a
+                report which is failed or have an error when harvested together.</p>
+            <p>Remember to refresh the page after every harvest to get the updated status on harvesting!</p>
+        </div>
+
+        <!--harvest all-->
+        <div class="column">
+            <div class='row'>
+                <h2>Harvest All</h2>
+                <p>
+                    <button type="submit" class='btn-harvest-vendor'>
+                        <i class="material-icons" id="all">get_app</i>
+                    </button>
+                </p>
+            </div>
+            <!--current harvesting period-->
+            <div class='row'>
+                <h2>Current Harvesting Period: </h2>
+                <p class="period"><?=getPeriod()?></p>
+            </div>
+        </div>
+        <!--open error dialog-->
+        <div class="column">
+            <div data-role="link" class="ui-content">
+                <h2><a id="error-report" href="#error-dialog">Error Report</a></h2>
+            </div>
+        </div>
+    </div>
+
+    <!--create the table and enable one vendor harvest-->
+    <div class='row' id='statusTable'>
+        <h2>Vendor Finder</h2>
+
+        <!--search bar-->
+        <input type="text" id="myInput" onkeyup="search()" placeholder="Search for vendors...">
+
+        <!--icon meaning-->
+        <p>
+            <i class="material-icons">check</i>Harvest Success
+            <i class="material-icons">clear</i>Server Error
+            <i class="material-icons">feedback</i>Report Error
+            <i class="material-icons">grade</i>New
+            <i class="material-icons" id="unsupported">cancel</i>Not Supported
+        </p>
+
+        <!--headers-->
+        <table id="status">
+            <tr class="header">
+                <th>Name</th>
+                <th>PR</th>
+                <th>PR_P1</th>
+                <th>DR</th>
+                <th>DR_D1</th>
+                <th>DR_D2</th>
+                <th>TR</th>
+                <th>TR_B1</th>
+                <th>TR_B2</th>
+                <th>TR_B3</th>
+                <th>TR_J1</th>
+                <th>TR_J2</th>
+                <th>TR_J3</th>
+                <th>TR_J4</th>
+                <th>IR</th>
+                <th>IR_M1</th>
+                <th>IR_A1</th>
+                <th>Last Harvest</th>
+                <th>Harvest</th>
+            </tr>
+            <!--template loading-->
+            <!--get the status-->
+            <? var status=getStatus(); ?>
+            <!--loop through a row-->
+            <? for (var i = 0; i < status.length; i++) { ?>
+            <tr>
+                <!--vendor name column-->
+                <td>
+                    <div><?= status[i]['vendor'] ?></div>
+                </td>
+                <!--iterate through the report type-->
+                <? for(var j in status[i]){ ?>
+                <!--if it's not rownumber or vendor name-->
+                <?if(j!='rowNum'&&j!='vendor'&&j!='last'){?>
+                <td>
+                    <!--set icon according to the value-->
+                    <?if(status[i][j]==0){?>
+                    <button type="submit" id='<?=status[i]['vendor']?>' data-type="<?=j?>" class='btn-retry-report'>
+                    <i class="material-icons">clear</i></button>
+                    <?}else if(status[i][j]==1){?>
+                    <i class="material-icons">check</i>
+                    <?}else if(status[i][j]==2){?>
+                    <button type="submit" id='<?=status[i]['vendor']?>' data-type="<?=j?>" class='btn-retry-report'>
+                    <i class="material-icons">feedback</i></button>
+                    <?}else if(status[i][j]==3){?>
+                    <button type="submit" id='<?=status[i]['vendor']?>' data-type="<?=j?>" class='btn-retry-report'>
+                    <i class="material-icons">grade</i></button>
+                    <?}else if(status[i][j]==4){?>
+                    <i class="material-icons" id="unsupported">cancel</i>
+                    <?}?>
+                </td>
+                <? }} ?>
+                <!--load and set the date-->
+                <td><?=status[i]['last']?></td>
+                <td>
+                    <!--create the button element-->
+                    <div>
+                        <button type="submit" id='<?=status[i]['vendor']?>' class='btn-harvest-vendor'>
+                        <i class="material-icons">get_app</i></button></div>
+                </td>
+                <td></td>
+            </tr>
+            <?} ?>
+        </table>
+    </div>
+</div>
+
+<!--create error report dialog content-->
+<div data-role="page" data-dialog="true" id="error-dialog">
+    <div data-role="header">
+        <h1>Error Report</h1>
+    </div>
+
+    <div data-role="main" class="ui-content">
+        <p id="errors"></p>
+    </div>
+
+    <div data-role="footer">
+        <h1>Remember to refresh the page for updated status!</h1>
+    </div>
+</div>
+
+
+<script>
+    /** determines which function gets called in scripts.html */
+    $('.btn-harvest-vendor').on('click', btnClassVendor).promise();
+    $('.btn-retry-report').on('click', btnClassReport).promise();
+</script>
+
+</body>
+</html>

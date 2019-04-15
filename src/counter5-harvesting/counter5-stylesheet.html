@@ -1,0 +1,117 @@
+<style>
+    /* Style the header */
+    .header {
+        background-color: #f1f1f1;
+        padding: 20px;
+        text-align: center;
+    }
+
+    /* navigation bar style */
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: royalblue;
+    }
+
+    li {
+        float: left;
+    }
+
+    li a {
+        display: block;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+    li a:hover {
+        background-color: #117;
+    }
+
+    /* Create three equal columns that floats next to each other */
+    .column {
+        float: left;
+        text-align: center;
+        width: 33.33%;
+    }
+
+    .column-instruction {
+        float: left;
+        text-align: center;
+        width: 33.33%;
+        text-align: left;
+    }
+
+
+    /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+    @media screen and (max-width: 600px) {
+        .column,.column-instruction {
+            width: 100%;
+        }
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+        content: '';
+        display: table;
+        clear: both;
+        padding: 20px;
+    }
+
+
+    /* button style */
+    .btn-harvest-vendor, .btn-retry-report {
+        background-color: white;
+        border: none;
+        color: black;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    /* table settings */
+    #myInput {
+        font-size: 16px; /* Increase font-size */
+        padding: 12px 20px 12px 40px; /* Add some padding */
+    }
+
+    #status {
+        border-collapse: collapse; /* Collapse borders */
+        width: 100%; /* Full-width */
+        border: 1px solid #ddd; /* Add a grey border */
+        font-size: 18px; /* Increase font-size */
+    }
+
+    #status th, #status td {
+        text-align: center; /* center-align text */
+        padding: 5px; /* Add padding */
+    }
+
+    #status tr {
+        /* Add a bottom border to all table rows */
+        border-bottom: 1px solid #ddd;
+    }
+
+    #status tr.header, #status tr:hover {
+        /* Add a grey background color to the table header and on hover */
+        background-color: #f1f1f1;
+    }
+
+    .float-right-nav {
+        float: right;
+    }
+
+    .period {color:red;}
+
+    #all {font-size:50px;}
+
+    #unsupported {color:red;}
+
+    #navi-ref {
+        text-shadow: none;
+        color: white;
+    }
+</style>

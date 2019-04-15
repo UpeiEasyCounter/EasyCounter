@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base target="_top">
+    <meta charset="UTF-8">
+    <title>Make a Search</title>
+    <!--load CSS-->
+    <?!= include('query-database/query-database-style'); ?>
+</head>
+<body>
+
+<div>
+    <ul>
+        <li><?var url = getScriptUrl();?>
+            <a href='<?=url?>?page=Home/dashboard'
+               class="nav-item__link nav-item__link--intro navigation__link nav-item__link--active">
+                Home
+            </a>
+        </li>
+    </ul>
+</div>
+
+<h2 class="title-align">Enter the Search Parameters</h2>
+<div class="container">
+
+    <form id="search-data">
+        <div class="row">
+            <!-- TITLE OF REPORT / JOURNAL ENTRY-->
+            <div class="col-75">
+                <label for="reportTitle">Title</label>
+            </div>
+            <div class="col-75">
+                <input type="text" id="reportTitle" name="reportTitle" placeholder=" The name of the report">
+            </div>
+        </div>
+        <div class="row">
+            <!--THE ISSN OF THE REPORT BEING SEARCHED FOR -->
+            <div class="col-75">
+                <label for="Issn">ISSN</label>
+            </div>
+            <div class="col-75">
+                <input type="text" id="Issn" name="Issn" placeholder="The ISSN for the report being searched for">
+            </div>
+        </div>
+
+        <!--Optional field for an ISBN-->
+        <div class="row">
+            <!--THE ISBN TO BE QUERIED-->
+            <div class="col-75">
+                <label for="dates">ISBN</label>
+            </div>
+            <div class="col-75">
+                <input type="text" id="dates" name="date" placeholder="Input an ISBN">
+            </div>
+        </div>
+
+        <div class="row">
+            <!--THE DATES OF THE REPORTS BEING QUERIED-->
+            <!--Class may need to be adjusted to show multiple dates or a date range-->
+            <div class="col-75">
+                <label for="year">Year</label>
+            </div>
+            <div class="col-75">
+                <input type="text" id="year" name="year" placeholder="Input a date">
+            </div>
+        </div>
+
+        <div class="row">
+            <!--THE DATES OF THE REPORTS BEING QUERIED-->
+            <!--Class may need to be adjusted to show multiple dates or a date range-->
+            <div class="col-75">
+                <label for="type">Report Type</label>
+            </div>
+            <div class="col-75">
+                <input type="text" id="type" name="type" placeholder="Type of Report">
+            </div>
+        </div>
+
+        <div class="btn-align">
+            <!-- Submit Button for the Form -->
+            <input type="submit" value="Search" id="searchButton" onclick="submitSearch()">
+        </div>
+
+    </form>
+</div>
+
+</body>
+</html>

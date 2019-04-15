@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base target="_top">
+    <meta charset="UTF-8">
+    <title>Make a Search</title>
+    <!--load CSS-->
+    <?!= include('query-database/query-database-style'); ?>
+</head>
+<body>
+
+<div>
+    <ul>
+        <li><?var url = getScriptUrl();?>
+            <a href='<?=url?>?page=Home/dashboard'
+               class="nav-item__link nav-item__link--intro navigation__link nav-item__link--active">
+                Home
+            </a>
+        </li>
+    </ul>
+</div>
+
+<h2 class="title-align">Enter the Search Parameters</h2>
+<div class="container">
+
+    <form id="search-data">
+        <div class="row">
+            <!-- TITLE OF REPORT / JOURNAL ENTRY-->
+            <div class="col-75">
+                <input type="radio" name = "searchType" id = 'title' onclick="check(this.id)"checked="true" /><font color="black">Title</font>
+            </div>
+            <div class="col-75">
+                <input type="text" id="reportTitle" name="reportTitle" placeholder=" The name of the report">
+            </div>
+        </div>
+
+        <!--set the rado button for the title search -->
+        <div class="row">
+            <input type="radio" name="searchOption" value="exact match" checked> <font color="black">Exact Match</font>
+            <input type="radio" name="searchOption" value="anywhere match"> <font color="black">Anywhere Match</font>
+            <input type="radio" name="searchOption" value="begin with"> <font color="black">Begin With</font>
+        </div>
+
+        <div class="row">
+            <!--THE ISSN OF THE REPORT BEING SEARCHED FOR -->
+            <div class="col-75">
+                <br>
+                <input type="radio" name = "searchType" id ="issn" onclick="check(this.id)" /><font color="black">ISSN</font>
+            </div>
+            <div class="col-75">
+                <input type="text" id="Issn" name="Issn" placeholder="The ISSN for the report being searched for" disabled>
+            </div>
+        </div>
+
+        <!--Optional field for an ISBN-->
+        <div class="row">
+            <!--THE ISBN TO BE QUERIED-->
+            <div class="col-75">
+                <input type="radio" name = "searchType" id = "isbn" onclick="check(this.id)" /><font color="black">ISBN</font>
+            </div>
+            <div class="col-75">
+                <input type="text" id="dates" name="Isbn" placeholder="Input an ISBN" disabled>
+            </div>
+        </div>
+
+        <div class="row">
+            <!--THE DATES OF THE REPORTS BEING QUERIED-->
+            <!--Class may need to be adjusted to show multiple dates or a date range-->
+            <div class="col-75">
+                <label for="year">Year</label>
+            </div>
+            <div class="col-75">
+                <input type="text" id="year" name="year" placeholder="Input a single year or type 'all' to search all the Search Index">
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <input type="radio" name="reportType" value="TR" checked> <font color="black">TR</font>
+            <input type="radio" name="reportType" value="TR_B1"> <font color="black">TR_B1</font>
+            <input type="radio" name="reportType" value="TR_B2"> <font color="black">TR_B2</font>
+            <input type="radio" name="reportType" value="TR_B3"> <font color="black">TR_B3</font>
+            <input type="radio" name="reportType" value="TR_J1"> <font color="black">TR_J1</font>
+            <input type="radio" name="reportType" value="TR_J2"> <font color="black">TR_J2</font>
+            <input type="radio" name="reportType" value="TR_J3"> <font color="black">TR_J3</font>
+            <input type="radio" name="reportType" value="TR_J4"> <font color="black">TR_J4</font>
+        </div>
+
+
+        <div class="btn-align">
+
+            <!-- Submit Button for the Form -->
+            <input type="submit" value="Search" id="searchButton">
+        </div>
+
+    </form>
+</div>
+<script src='//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
+<script>
+    function check(id)
+    {
+
+
+        if(id == 'title')
+        {
+            document.getElementById("Issn").disabled = true;
+            document.getElementById("Issn").value = null;
+
+
+            document.getElementById("dates").disabled = true;
+            document.getElementById("dates").value = null;
+
+            document.getElementById('reportTitle').disabled = false;
+
+            var option = document.getElementsByName("searchOption");
+            for(var i =0; i<option.length;i++)
+            {
+                option[i].disabled = false;
+            }
+
+            option[0].checked= true;
+        }
+        if(id == 'issn')
+        {
+            document.getElementById("reportTitle").disabled = true;
+            document.getElementById("reportTitle").value = null;
+
+            document.getElementById("dates").disabled = true;
+            document.getElementById("dates").value = null;
+
+            document.getElementById('Issn').disabled = false;
+            var option = document.getElementsByName("searchOption");
+
+            for(var i =0; i<option.length;i++)
+            {
+                option[i].disabled = true;
+                option[i].checked = false;
+            }
+
+        }
+        if(id == 'isbn')
+        {
+            document.getElementById("Issn").disabled = true;
+            document.getElementById("Issn").value = null;
+
+            document.getElementById("reportTitle").disabled = true;
+            document.getElementById("reportTitle").value = null;
+
+            document.getElementById('dates').disabled = false;
+
+            var option = document.getElementsByName("searchOption");
+            for(var i =0; i<option.length;i++)
+            {
+                option[i].disabled = true;
+                option[i].checked = false;
+            }
+        }
+
+    }
+    $("#search-data").submit(function () {google.script.run.withSuccessHandler(searchResult).search(this); return false;});
+    function searchResult(url){
+        alert(url);
+    }
+</script>
+</body>
+</html>

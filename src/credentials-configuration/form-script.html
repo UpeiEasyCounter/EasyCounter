@@ -1,0 +1,41 @@
+<script>
+function feedback() {
+    alert("Thank you, your input has been saved");
+
+}
+
+function getVendorData() {
+    var e = document.getElementById("dropDown");
+    var strUser = e.options[e.selectedIndex].text;
+    //google.script.run.withSuccessHandler(preFillForm).accessRow(strUser,1);
+    google.script.run.withSuccessHandler(preFillForm).accessRow(strUser,2);
+}
+
+function preFillForm(rowValues)
+{
+    //assigns values to the elements of the page
+    var values = rowValues.toString().split(',');
+    console.log(values);
+    $("#vendorName").val(values[0]);
+    $("#vendorURL").val(values[1]);
+    $("#cxId").val(values[2]);
+    $("#reqId").val(values[3]);
+    $("#apiKey").val(values[4]);
+    $("#platform").val(values[5]);
+
+}
+
+$(function() {
+    //calls the getvendor mathod
+    google.script.run.withSuccessHandler(populate).getVendor(2);
+
+});
+
+function populate(options) {
+    var list = $('#dropDown');
+    list.empty();
+    for (var i = 0; i < options.length; i++) {
+        list.append('<option>' + options[i] + '</option>');
+    }
+}
+</script>
