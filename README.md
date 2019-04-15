@@ -1,4 +1,4 @@
-### Installation 
+# Installation 
 ## Requirements: 
 A google account 
 Access to internet connection 
