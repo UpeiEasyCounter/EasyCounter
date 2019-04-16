@@ -105,7 +105,7 @@ function yearOfReport(dateString) {
  * Calculate number of files needed by Report
  * */
 function calcReportFiles(lines,MAX) {
-    return Math.ceil(lines/MAX).toFixed();
+    return Math.ceil(lines/MAX);
 }
 
 /**
