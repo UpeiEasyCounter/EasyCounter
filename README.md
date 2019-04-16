@@ -21,7 +21,7 @@
 * Save the URL as this will used to launch the application
 
 ## Table Format
-All spreadsheets in Easy COUNTER should be initialized with the header below</br>
+C5Status and C5URLs spreadsheets in Easy COUNTER should be initialized with the header below</br>
 ![](tableformat.png)
 Column A is used to store the Vendor names</br>
 Columns B to Q are used to store Report types (pr, pr_p1…)
