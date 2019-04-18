@@ -25,3 +25,5 @@ C5Status and C5URLs spreadsheets in Easy COUNTER should be initialized with the 
 ![](tableformat.png)
 Column A is used to store the Vendor names</br>
 Columns B to Q are used to store Report types (pr, pr_p1…)
+</br></br></br></br>
+#### Project Perform by: Aleix Molla, David A. Adams, Joshua Daniels, Ye Yuan and Yong Yu. 
